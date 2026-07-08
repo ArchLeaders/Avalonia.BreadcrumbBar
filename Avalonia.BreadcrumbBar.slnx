@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/SampleApp/SampleApp.csproj" />
+  </Folder>
   <Project Path="Avalonia.BreadcrumbBar/Avalonia.BreadcrumbBar.csproj" />
 </Solution>

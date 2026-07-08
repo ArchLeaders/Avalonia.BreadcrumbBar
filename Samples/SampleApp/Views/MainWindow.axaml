@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SampleApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:SampleApp.Models"
+        xmlns:i="https://github.com/projektanker/icons.avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SampleApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="SampleApp">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <BreadcrumbBar ItemsSource="{Binding Items}">
+        <BreadcrumbBar.ItemTemplate>
+            <DataTemplate x:DataType="models:Crumb">
+                <Grid ColumnDefinitions="Auto,*">
+                    <i:Icon Value="{Binding Icon}"
+                            Margin="0,0,4,0"
+                            IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                    
+                    <TextBlock Text="{Binding Title}" />
+                </Grid>
+            </DataTemplate>
+        </BreadcrumbBar.ItemTemplate>
+    </BreadcrumbBar>
+
+</Window>
