@@ -5,27 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:models="clr-namespace:SampleApp.Models"
         xmlns:i="https://github.com/projektanker/icons.avalonia"
+        xmlns:s="using:System"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SampleApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="SampleApp">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <BreadcrumbBar ItemsSource="{Binding Items}">
-        <BreadcrumbBar.ItemTemplate>
-            <DataTemplate x:DataType="models:Crumb">
-                <Grid ColumnDefinitions="Auto,*">
-                    <i:Icon Value="{Binding Icon}"
-                            Margin="0,0,4,0"
-                            IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                    
-                    <TextBlock Text="{Binding Title}" />
-                </Grid>
-            </DataTemplate>
-        </BreadcrumbBar.ItemTemplate>
-    </BreadcrumbBar>
+    <StackPanel Spacing="10" Margin="15">
+        <TextBlock Text="Data-Bound" />
+        <BreadcrumbBar ItemsSource="{Binding Items}">
+            <BreadcrumbBar.ItemTemplate>
+                <DataTemplate x:DataType="models:Crumb">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <i:Icon Value="{Binding Icon}"
+                                Margin="0,0,3,0"
+                                IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center"
+                                   Text="{Binding Title}" />
+                    </Grid>
+                </DataTemplate>
+            </BreadcrumbBar.ItemTemplate>
+        </BreadcrumbBar>
+
+        <TextBlock Text="XAML" />
+        <BreadcrumbBar>
+            <BreadcrumbBar.Resources>
+                <DataTemplate x:Key="IconTemplate" x:DataType="s:Object">
+                    <i:Icon Value="{Binding}"
+                            IsVisible="{Binding Converter={x:Static ObjectConverters.IsNotNull}}" />
+                </DataTemplate>
+            </BreadcrumbBar.Resources>
+
+            <BreadcrumbBarItem Content="Home"
+                               Icon="fa-solid fa-house" IconTemplate="{StaticResource IconTemplate}" />
+            <BreadcrumbBarItem Content="Test 2"
+                               Icon="fa-solid fa-cube" IconTemplate="{StaticResource IconTemplate}">
+                <BreadcrumbBarItem.Flyout>
+                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                        <MenuItem Header="Test 3" i:MenuItem.Icon="fa-solid fa-file" />
+                    </MenuFlyout>
+                </BreadcrumbBarItem.Flyout>
+            </BreadcrumbBarItem>
+            <BreadcrumbBarItem Content="Test 3"
+                               Icon="fa-solid fa-file" IconTemplate="{StaticResource IconTemplate}"/>
+        </BreadcrumbBar>
+    </StackPanel>
 
 </Window>
