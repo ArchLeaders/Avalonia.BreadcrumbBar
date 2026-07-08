@@ -11,6 +11,7 @@ namespace Avalonia.BreadcrumbBar;
 [TemplatePart("PART_Button", typeof(Button))]
 [TemplatePart("PART_Icon", typeof(ContentPresenter))]
 [TemplatePart("PART_ContentPresenter", typeof(ContentPresenter))]
+[TemplatePart("PART_FlyoutButton", typeof(Button))]
 [TemplatePart("PART_ChevronIcon", typeof(Viewbox))]
 [TemplatePart("PART_ChevronPath", typeof(Path))]
 [PseudoClasses(":hasflyout")]
