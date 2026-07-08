@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
     <RepositoryUrl>https://codeberg.org/ArchLeaders/Avalonia.BreadcrumbBar</RepositoryUrl>
-    <PackageId>Avalonia.BreadcrumbBar</PackageId>
+    <PackageId>ArchLeaders.Avalonia.BreadcrumbBar</PackageId>
     <Description>A BreadcrumbBar control for Avalonia</Description>
     <PackageTags>c-sharp;xaml;cross-platform;dotnet;dotnetcore;avalonia;avaloniaui;fluent;fluent-design</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -19,12 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Icon.png">
-      <Pack>True</Pack>
+    <None Include="..\Icon.png" Visible="false">
+      <Pack>true</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\Readme.md">
-      <Pack>True</Pack>
+    <None Include="..\Readme.md" Visible="false">
+      <Pack>true</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
