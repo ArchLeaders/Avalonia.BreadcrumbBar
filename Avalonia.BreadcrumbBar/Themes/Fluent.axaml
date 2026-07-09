@@ -21,6 +21,7 @@
             <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
             <ControlTheme x:Key="BreadcrumbBarButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                 <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
                 
                 <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
