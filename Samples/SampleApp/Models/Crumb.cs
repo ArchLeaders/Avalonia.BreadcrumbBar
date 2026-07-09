@@ -1,8 +1,11 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace SampleApp.Models;
 
-public sealed class Crumb(string title, string? icon = null)
+public sealed partial class Crumb(string title, string? icon = null) : ObservableObject
 {
-    public string Title { get; } = title;
+    [ObservableProperty]
+    public partial string Title { get; set; } = title;
 
     public string? Icon { get; } = icon;
 }

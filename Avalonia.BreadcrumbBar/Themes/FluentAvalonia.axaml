@@ -3,6 +3,7 @@
     <Styles.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="BreadcrumbBarItemChevronFill" Color="{DynamicResource TextFillColorSecondary}" />
+            <SolidColorBrush x:Key="BreadcrumbBarItemEllipsisFill" Color="{DynamicResource TextFillColorSecondary}" />
         </ResourceDictionary>
     </Styles.Resources>
     

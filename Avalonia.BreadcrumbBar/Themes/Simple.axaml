@@ -3,23 +3,22 @@
         xmlns:s="clr-namespace:System;assembly=System.Runtime">
     <Styles.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="BreadcrumbBarItemChevronFill" Color="{DynamicResource ThemeControlHighColor}" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="BreadcrumbBarItemChevronFill" Color="{DynamicResource ThemeControlHighColor}" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
+            <SolidColorBrush x:Key="BreadcrumbBarItemChevronFill" Color="{DynamicResource ThemeControlHighColor}" />
+            <SolidColorBrush x:Key="BreadcrumbBarItemEllipsisFill" Color="{DynamicResource ThemeControlHighColor}" />
 
             <StreamGeometry x:Key="BreadcrumbBarChevron">M2.108,1.79L3.865,0L9.893,5.994L3.866,12L2.107,10.212L6.338,5.996L2.108,1.79Z</StreamGeometry>
             <StreamGeometry x:Key="BreadcrumbBarChevronDown">M10.21,2.108L12,3.865L6.006,9.893L0,3.866L1.788,2.107L6.004,6.338L10.21,2.108Z</StreamGeometry>
+            <StreamGeometry x:Key="BreadcrumbBarEllipsis">
+                M10.719,4.509C11.426,4.509 12,5.083 12,5.79C12,6.497 11.426,7.071 10.719,7.071C10.012,7.071 9.438,6.497 9.438,5.79C9.438,5.083 10.012,4.509 10.719,4.509ZM1.281,4.509C1.988,4.509 2.562,5.083 2.562,5.79C2.562,6.497 1.988,7.071 1.281,7.071C0.574,7.071 0,6.497 0,5.79C0,5.083 0.574,4.509 1.281,4.509ZM6,4.509C6.707,4.509 7.281,5.083 7.281,5.79C7.281,6.497 6.707,7.071 6,7.071C5.293,7.071 4.719,6.497 4.719,5.79C4.719,5.083 5.293,4.509 6,4.509Z
+            </StreamGeometry>
 
-            <Thickness x:Key="BreadcrumbBarItemPadding">3,2</Thickness>
-            <Thickness x:Key="BreadcrumbBarItemChevronPadding">4,0</Thickness>
+            <Thickness x:Key="BreadcrumbBarItemPadding">4,2</Thickness>
             <Thickness x:Key="BreadcrumbBarItemIconPadding">0,0,3,0</Thickness>
-            <s:Double x:Key="BreadcrumbBarItemChevronHeight">12</s:Double>
+            <Thickness x:Key="BreadcrumbBarItemChevronPadding">4,0</Thickness>
+            <Thickness x:Key="BreadcrumbBarOverflowButtonPadding">4,2</Thickness>
             <s:Double x:Key="BreadcrumbBarItemChevronWidth">8</s:Double>
+            <s:Double x:Key="BreadcrumbBarItemChevronHeight">12</s:Double>
+            <s:Double x:Key="BreadcrumbBarOverflowButtonWidth">12</s:Double>
 
             <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
             <ControlTheme x:Key="BreadcrumbBarButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -27,6 +26,53 @@
                 
                 <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+                </Style>
+            </ControlTheme>
+
+            <ControlTheme x:Key="BreadcrumbBarChevronButton" TargetType="Button" BasedOn="{StaticResource BreadcrumbBarButton}">
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="ClickMode" Value="Press" />
+                <Setter Property="Padding" Value="{StaticResource BreadcrumbBarItemPadding}" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                
+                <Setter Property="Template">
+                    <ControlTemplate>
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                          CornerRadius="{TemplateBinding CornerRadius}"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.Content>
+                                <Viewbox Name="PART_ChevronIcon"
+                                         Height="{StaticResource BreadcrumbBarItemChevronHeight}"
+                                         Width="{StaticResource BreadcrumbBarItemChevronWidth}"
+                                         Margin="{StaticResource BreadcrumbBarItemChevronPadding}"
+                                         ClipToBounds="False">
+                                    <Path Name="PART_ChevronPath"
+                                          Fill="{DynamicResource BreadcrumbBarItemChevronFill}"
+                                          Data="{StaticResource BreadcrumbBarChevron}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Viewbox>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter>
+                
+                <Style Selector="^ /template/ Path#PART_ChevronPath">
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.025" />
+                        </Transitions>
+                    </Setter>
+                </Style>
+
+                <Style Selector="^:flyout-open /template/ Path#PART_ChevronPath">
+                    <Setter Property="RenderTransform" Value="rotate(90deg)" />
                 </Style>
             </ControlTheme>
 
@@ -39,16 +85,55 @@
                 </Setter>
                 <Setter Property="Template">
                     <ControlTemplate>
-                        <ItemsPresenter Name="PART_ItemsPresenter"
-                                        ItemsPanel="{TemplateBinding ItemsPanel}"
-                                        Margin="{TemplateBinding Padding}" />
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              Background="{TemplateBinding Background}">
+                            <Grid Name="PART_OverflowGrid"
+                                  ColumnDefinitions="Auto,Auto">
+                                <Button Name="PART_OverflowButton"
+                                        Theme="{StaticResource BreadcrumbBarButton}"
+                                        Padding="{StaticResource BreadcrumbBarOverflowButtonPadding}"
+                                        VerticalContentAlignment="Center"
+                                        IsVisible="False">
+                                    <Button.Content>
+                                        <Viewbox Name="PART_EllipsisIcon"
+                                                 Width="{StaticResource BreadcrumbBarOverflowButtonWidth}"
+                                                 VerticalAlignment="Center" ClipToBounds="False">
+                                            <Path Name="PART_EllipsisPath"
+                                                  Width="12" Height="12"
+                                                  Fill="{DynamicResource BreadcrumbBarItemEllipsisFill}"
+                                                  Data="{StaticResource BreadcrumbBarEllipsis}"
+                                                  VerticalAlignment="Center" />
+                                        </Viewbox>
+                                    </Button.Content>
+                                </Button>
+                                
+                                <Button Grid.Column="1"
+                                        Name="PART_OverflowChevronButton"
+                                        Theme="{StaticResource BreadcrumbBarChevronButton}"
+                                        IsVisible="False" />
+                            </Grid>
+
+                            <ItemsPresenter Grid.Column="2"
+                                            Name="PART_ItemsPresenter"
+                                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                                            Margin="{TemplateBinding Padding}" />
+                        </Grid>
                     </ControlTemplate>
                 </Setter>
+
+                <Style Selector="^:overflow /template/ Button#PART_OverflowButton">
+                    <Setter Property="IsVisible" Value="True" />
+                </Style>
+
+                <Style Selector="^:overflow /template/ Button#PART_OverflowChevronButton">
+                    <Setter Property="IsVisible" Value="True" />
+                </Style>
             </ControlTheme>
 
             <ControlTheme x:Key="{x:Type BreadcrumbBarItem}" TargetType="BreadcrumbBarItem">
                 <Setter Property="Padding" Value="{StaticResource BreadcrumbBarItemPadding}" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="IconPadding" Value="{StaticResource BreadcrumbBarItemIconPadding}" />
                 <Setter Property="Template">
                     <ControlTemplate>
@@ -70,7 +155,7 @@
                                         Content="{TemplateBinding Icon}"
                                         ContentTemplate="{TemplateBinding IconTemplate}"
                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                    
+
                                     <ContentPresenter
                                         Grid.Column="1"
                                         Name="PART_ContentPresenter"
@@ -81,52 +166,24 @@
                             </Button>
                             
                             <Button Grid.Column="1"
-                                    Name="PART_FlyoutButton"
-                                    IsHitTestVisible="False"
-                                    Focusable="False" ClickMode="Press"
-                                    Theme="{StaticResource BreadcrumbBarButton}"
-                                    Padding="{TemplateBinding Padding}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Flyout="{TemplateBinding Flyout}">
-                                <Viewbox Name="PART_ChevronIcon"
-                                         Height="{StaticResource BreadcrumbBarItemChevronHeight}"
-                                         Width="{StaticResource BreadcrumbBarItemChevronWidth}"
-                                         Margin="{StaticResource BreadcrumbBarItemChevronPadding}"
-                                         ClipToBounds="False">
-                                    <Path Name="PART_ChevronPath"
-                                          Fill="{DynamicResource BreadcrumbBarItemChevronFill}"
-                                          Data="{StaticResource BreadcrumbBarChevron}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                </Viewbox>
-                            </Button>
+                                    Name="PART_ChevronButton"
+                                    Theme="{StaticResource BreadcrumbBarChevronButton}"
+                                    Flyout="{TemplateBinding Flyout}" />
                         </Grid>
                     </ControlTemplate>
                 </Setter>
-                
-                <Style Selector="^:nth-last-child(1) /template/ Button#PART_FlyoutButton">
+
+                <Style Selector="^:nth-last-child(1) /template/ Button#PART_ChevronButton">
                     <Setter Property="IsVisible" Value="False" />
                 </Style>
-                
+
                 <Style Selector="^.iconOnly /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="IsVisible" Value="False" />
                 </Style>
-                
-                <Style Selector="^:hasflyout /template/ Button#PART_FlyoutButton">
+
+                <Style Selector="^:hasflyout /template/ Button#PART_ChevronButton">
                     <Setter Property="IsHitTestVisible" Value="True" />
                     <Setter Property="Focusable" Value="True" />
-                    
-                    <Style Selector="^ Path#PART_ChevronPath">
-                        <Setter Property="Transitions">
-                            <Transitions>
-                                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.025" />
-                            </Transitions>
-                        </Setter>
-                    </Style>
-                    
-                    <Style Selector="^:flyout-open Path#PART_ChevronPath">
-                        <Setter Property="RenderTransform" Value="rotate(90deg)" />
-                    </Style>
                 </Style>
             </ControlTheme>
         </ResourceDictionary>

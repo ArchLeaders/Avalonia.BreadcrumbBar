@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using Avalonia.BreadcrumbBar.Interactivity;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
@@ -14,7 +13,7 @@ namespace Avalonia.BreadcrumbBar;
 [TemplatePart("PART_Button", typeof(Button), IsRequired = true)]
 [TemplatePart("PART_Icon", typeof(ContentPresenter))]
 [TemplatePart("PART_ContentPresenter", typeof(ContentPresenter))]
-[TemplatePart("PART_FlyoutButton", typeof(Button))]
+[TemplatePart("PART_ChevronButton", typeof(Button))]
 [TemplatePart("PART_ChevronIcon", typeof(Viewbox))]
 [TemplatePart("PART_ChevronPath", typeof(Path))]
 [PseudoClasses(":hasflyout")]
@@ -83,7 +82,18 @@ public sealed class BreadcrumbBarItem : ContentControl
 
         e.NameScope.Get<Button>("PART_Button").Click += OnItemClicked;
     }
-    
+
+    protected override void OnSizeChanged(SizeChangedEventArgs e)
+    {
+        base.OnSizeChanged(e);
+        
+        if (this.GetLogicalParent<BreadcrumbBar>() is not { } parent) {
+            return;
+        }
+
+        parent.UpdateOverflow(parent.Bounds.Width);
+    }
+
     private void OnItemClicked(object? sender, RoutedEventArgs e)
     {
         if (this.GetLogicalParent<BreadcrumbBar>() is not { } parent) {
