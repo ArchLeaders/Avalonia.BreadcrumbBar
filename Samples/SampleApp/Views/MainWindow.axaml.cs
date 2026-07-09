@@ -1,7 +1,6 @@
 using System;
 using Avalonia.BreadcrumbBar.Interactivity;
 using Avalonia.Controls;
-using SampleApp.Models;
 
 namespace SampleApp.Views;
 
