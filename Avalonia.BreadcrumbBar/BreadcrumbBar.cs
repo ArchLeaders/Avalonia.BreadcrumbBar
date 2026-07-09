@@ -56,16 +56,6 @@ public sealed class BreadcrumbBar : ItemsControl
         e.NameScope.Get<Button>("PART_OverflowButton").Flyout = _overflowFlyout;
     }
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-
-        if (change.Property == ItemCountProperty) {
-            // TODO: Bounds.Width is lower than expected here
-            UpdateOverflow(Bounds.Width);
-        }
-    }
-
     protected override void OnSizeChanged(SizeChangedEventArgs e)
     {
         base.OnSizeChanged(e);
@@ -88,7 +78,7 @@ public sealed class BreadcrumbBar : ItemsControl
         }
     }
 
-    private void UpdateOverflow(double targetMaxWidth)
+    internal void UpdateOverflow(double targetMaxWidth)
     {
         bool isOverflow = false;
         var size = _overflowGrid?.Bounds.Width ?? 0;

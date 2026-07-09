@@ -82,7 +82,18 @@ public sealed class BreadcrumbBarItem : ContentControl
 
         e.NameScope.Get<Button>("PART_Button").Click += OnItemClicked;
     }
-    
+
+    protected override void OnSizeChanged(SizeChangedEventArgs e)
+    {
+        base.OnSizeChanged(e);
+        
+        if (this.GetLogicalParent<BreadcrumbBar>() is not { } parent) {
+            return;
+        }
+
+        parent.UpdateOverflow(parent.Bounds.Width);
+    }
+
     private void OnItemClicked(object? sender, RoutedEventArgs e)
     {
         if (this.GetLogicalParent<BreadcrumbBar>() is not { } parent) {
