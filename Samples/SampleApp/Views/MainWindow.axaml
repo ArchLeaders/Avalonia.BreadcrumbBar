@@ -16,8 +16,9 @@
     </Design.DataContext>
 
     <StackPanel Spacing="10" Margin="15">
-        <TextBlock Text="Data-Bound" />
-        <BreadcrumbBar ItemsSource="{Binding Items}">
+        <TextBlock Text="Data-Bound / MVVM" />
+        <BreadcrumbBar ItemsSource="{Binding Items}"
+                       Command="{Binding NavToCommand}">
             <BreadcrumbBar.ItemTemplate>
                 <DataTemplate x:DataType="models:Crumb">
                     <Grid ColumnDefinitions="Auto,*">
@@ -33,7 +34,7 @@
         </BreadcrumbBar>
 
         <TextBlock Text="XAML" />
-        <BreadcrumbBar>
+        <BreadcrumbBar ItemClicked="BreadcrumbBar_OnItemClicked">
             <BreadcrumbBar.Resources>
                 <DataTemplate x:Key="IconTemplate" x:DataType="s:Object">
                     <i:Icon Value="{Binding}"
