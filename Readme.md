@@ -4,4 +4,4 @@
 
 A breadcrumb bar control based on the WinUI [Breadcrumb Bar](https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/breadcrumbbar) control.
 
-<img src="./Documentation/Screenshot.jpg" alt="Screenshot of sample apps" width="512px" />
+![Screenshot of sample apps](./Documentation/Screenshot.jpg)
