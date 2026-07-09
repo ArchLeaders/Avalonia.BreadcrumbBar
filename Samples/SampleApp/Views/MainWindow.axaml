@@ -24,6 +24,9 @@
 
     <StackPanel Spacing="10" Margin="15">
         <TextBlock Text="Data-Bound / MVVM" />
+        
+        <Button Content="Add" Command="{Binding AddCommand}"/>
+        
         <BreadcrumbBar ItemsSource="{Binding Items}"
                        Command="{Binding NavToCommand}">
             <BreadcrumbBar.ItemTemplate>
@@ -59,20 +62,24 @@
         <TextBlock Text="Overflow" />
         
         <Border BorderThickness="1" BorderBrush="Red"
-                Width="512" HorizontalAlignment="Left">
-            <BreadcrumbBar ItemClicked="BreadcrumbBar_OnItemClicked">
-                <BreadcrumbBarItem Content="Test 1" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 2" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 3" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 4" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 5" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 6" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 7" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 8" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test 9" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test A" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-                <BreadcrumbBarItem Content="Test B" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
-            </BreadcrumbBar>
+                HorizontalAlignment="Stretch">
+            <Grid ColumnDefinitions="*,Auto,*">
+                <BreadcrumbBar ItemClicked="BreadcrumbBar_OnItemClicked">
+                    <BreadcrumbBarItem Content="Test 1" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 2" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 3" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 4" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 5" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 6" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 7" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 8" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test 9" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test A" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                    <BreadcrumbBarItem Content="Test B" Icon="fa-solid fa-folder" IconTemplate="{StaticResource IconTemplate}" />
+                </BreadcrumbBar>
+                
+                <GridSplitter Grid.Column="1" Background="Red" />
+            </Grid>
         </Border>
     </StackPanel>
 
