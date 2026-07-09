@@ -21,6 +21,12 @@ public sealed partial class MainWindowViewModel
     }
 
     [RelayCommand]
+    private void Change()
+    {
+        Items[0].Title = "someverylongstringoftexttocauseanoverflowonchange";
+    }
+
+    [RelayCommand]
     private void NavTo(BreadcrumbBarItem item)
     {
         Console.WriteLine($"Command -> {(item.DataContext is Crumb { Title: { } title } ? title : item)}");

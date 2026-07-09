@@ -25,7 +25,10 @@
     <StackPanel Spacing="10" Margin="15">
         <TextBlock Text="Data-Bound / MVVM" />
         
-        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Add" Command="{Binding AddCommand}"/>
+            <Button Content="Change" Command="{Binding ChangeCommand}"/>
+        </StackPanel>
         
         <BreadcrumbBar ItemsSource="{Binding Items}"
                        Command="{Binding NavToCommand}">
