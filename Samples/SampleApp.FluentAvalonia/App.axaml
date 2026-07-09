@@ -1,0 +1,12 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:styling="using:FluentAvalonia.Styling"
+             x:Class="SampleApp.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+  
+    <Application.Styles>
+        <styling:FluentAvaloniaTheme />
+        <StyleInclude Source="avares://Avalonia.BreadcrumbBar/Themes/FluentAvalonia.axaml" />
+    </Application.Styles>
+</Application>

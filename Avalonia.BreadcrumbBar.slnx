@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/Samples/">
+    <File Path="Samples/SampleApp.props" />
+    <Project Path="Samples/SampleApp.Fluent/SampleApp.Fluent.csproj" />
+    <Project Path="Samples/SampleApp.FluentAvalonia/SampleApp.FluentAvalonia.csproj" />
     <Project Path="Samples/SampleApp/SampleApp.csproj" />
   </Folder>
   <Project Path="Avalonia.BreadcrumbBar/Avalonia.BreadcrumbBar.csproj" />

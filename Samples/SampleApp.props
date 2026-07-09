@@ -1,0 +1,10 @@
+<Project>
+  <ItemGroup>
+    <AvaloniaXaml Include="../SampleApp/Views/*.axaml" Visible="false"/>
+    <Compile Include="../SampleApp/Models/*.cs" Visible="false"/>
+    <Compile Include="../SampleApp/ViewModels/*.cs" Visible="false"/>
+    <Compile Include="../SampleApp/Views/*.cs" Visible="false"/>
+    <Compile Include="../SampleApp/App.axaml.cs" Visible="false"/>
+    <Compile Include="../SampleApp/Program.cs" Visible="false"/>
+  </ItemGroup>
+</Project>
