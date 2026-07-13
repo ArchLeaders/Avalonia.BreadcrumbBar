@@ -5,7 +5,9 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.Interactivity;
+using Avalonia.Metadata;
 
 namespace Avalonia.BreadcrumbBar;
 
@@ -20,6 +22,9 @@ public sealed class BreadcrumbBar : ItemsControl
     
     public static readonly StyledProperty<IDataTemplate?> ItemIconTemplateProperty =
         AvaloniaProperty.Register<BreadcrumbBarItem, IDataTemplate?>(nameof(ItemIconTemplate));
+    
+    public static readonly StyledProperty<BindingBase?> ItemIconBindingProperty =
+        AvaloniaProperty.Register<BreadcrumbBarItem, BindingBase?>(nameof(ItemIconBinding));
 
     public static readonly StyledProperty<ICommand?> CommandProperty =
         AvaloniaProperty.Register<BreadcrumbBar, ICommand?>(nameof(Command), enableDataValidation: true);
@@ -41,6 +46,13 @@ public sealed class BreadcrumbBar : ItemsControl
         get => GetValue(ItemIconTemplateProperty);
         set => SetValue(ItemIconTemplateProperty, value);
     }
+    
+    [AssignBinding]
+    [InheritDataTypeFromItems("ItemsSource")]
+    public BindingBase ItemIconBinding {
+        get => GetValue(ItemIconBindingProperty) ?? new Binding();
+        set => SetValue(ItemIconBindingProperty, value);
+    }
 
     public ICommand? Command {
         get => GetValue(CommandProperty);
@@ -50,7 +62,7 @@ public sealed class BreadcrumbBar : ItemsControl
     protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
     {
         return new BreadcrumbBarItem {
-            Icon = item,
+            [!BreadcrumbBarItem.IconProperty] = ItemIconBinding,
             IconTemplate = ItemIconTemplate
         };
     }

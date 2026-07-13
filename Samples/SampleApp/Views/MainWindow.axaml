@@ -31,6 +31,8 @@
         </StackPanel>
         
         <BreadcrumbBar ItemsSource="{Binding Items}"
+                       ItemIconBinding="{Binding Icon}"
+                       ItemIconTemplate="{StaticResource IconTemplate}"
                        Command="{Binding NavToCommand}">
             <BreadcrumbBar.ItemTemplate>
                 <DataTemplate x:DataType="models:Crumb">
@@ -38,12 +40,6 @@
                                Text="{Binding Title}" />
                 </DataTemplate>
             </BreadcrumbBar.ItemTemplate>
-            <BreadcrumbBar.ItemIconTemplate>
-                <DataTemplate x:DataType="models:Crumb">
-                    <i:Icon Value="{Binding Icon}"
-                            IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
-                </DataTemplate>
-            </BreadcrumbBar.ItemIconTemplate>
         </BreadcrumbBar>
 
         <TextBlock Text="XAML" />
