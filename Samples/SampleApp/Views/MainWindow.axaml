@@ -34,16 +34,17 @@
                        Command="{Binding NavToCommand}">
             <BreadcrumbBar.ItemTemplate>
                 <DataTemplate x:DataType="models:Crumb">
-                    <Grid ColumnDefinitions="Auto,*">
-                        <i:Icon Value="{Binding Icon}"
-                                Margin="0,0,3,0"
-                                IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
-
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center"
-                                   Text="{Binding Title}" />
-                    </Grid>
+                    <TextBlock VerticalAlignment="Center"
+                               Text="{Binding Title}" />
                 </DataTemplate>
             </BreadcrumbBar.ItemTemplate>
+            <BreadcrumbBar.ItemIconTemplate>
+                <DataTemplate x:DataType="models:Crumb">
+                    <i:Icon Value="{Binding Icon}"
+                            Margin="0,0,3,0"
+                            IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                </DataTemplate>
+            </BreadcrumbBar.ItemIconTemplate>
         </BreadcrumbBar>
 
         <TextBlock Text="XAML" />
