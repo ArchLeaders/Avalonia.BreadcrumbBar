@@ -7,5 +7,9 @@
         </ResourceDictionary>
     </Styles.Resources>
     
+    <Style Selector="BreadcrumbBar MenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+        <Setter Property="ContentTemplate" Value="{TemplateBinding HeaderTemplate}" />
+    </Style>
+    
     <StyleInclude Source="Fluent.axaml" />
 </Styles>
