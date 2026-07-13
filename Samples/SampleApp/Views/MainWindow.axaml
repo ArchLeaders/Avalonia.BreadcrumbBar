@@ -41,7 +41,6 @@
             <BreadcrumbBar.ItemIconTemplate>
                 <DataTemplate x:DataType="models:Crumb">
                     <i:Icon Value="{Binding Icon}"
-                            Margin="0,0,3,0"
                             IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
                 </DataTemplate>
             </BreadcrumbBar.ItemIconTemplate>
